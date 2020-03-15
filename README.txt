@@ -1,0 +1,1 @@
+FIrst SQL Project using Codecademy's sample dataset.
