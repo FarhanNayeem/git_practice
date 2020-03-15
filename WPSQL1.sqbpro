@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="D:/Farhan/Codecademy/sql-population-queries-part-ii-starting/db.sqlite" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><current_tab id="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="125"/><column_width id="3" width="1310"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="0" parent="0"/><expanded_item id="1" parent="0"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="countries"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="countries" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort><column index="1" mode="1"/></sort><column_widths/><filter_values><column index="2" value=""/><column index="3" value=""/></filter_values><display_formats/><hidden_columns/><plot_y_axes/></table><table schema="main" name="population_years" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk=""><sort><column index="1" mode="1"/></sort><column_widths/><filter_values/><display_formats/><hidden_columns/><plot_y_axes/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">SELECT COUNT(name) FROM countries
+WHERE continent IS &quot;Africa&quot;;
+
+
+SELECT SUM(population_years.population) FROM population_years
+JOIN countries
+  ON population_years.country_id = countries.id
+WHERE countries.continent = &quot;Oceania&quot;
+AND population_years.year = 2005;
+
+SELECT ROUND(AVG(population_years.population),2) FROM population_years
+JOIN countries
+  ON population_years.country_id = countries.id
+WHERE countries.continent = &quot;South America&quot;
+AND population_years.year = 2003;
+
+
+WITH previous AS(SELECT countries.name, population_years.year, population_years.population FROM countries
+JOIN population_years
+  ON countries.id = population_years.country_id
+AND year = 2007) 
+
+SELECT MIN(population), name FROM previous;
+
+
+SELECT ROUND(AVG(population_years.population),2), population_years.year, countries.name FROM population_years
+JOIN countries
+ON countries.id = population_years.country_id
+WHERE name = &quot;Poland&quot;;
+
+
+WITH previous_results AS (SELECT * FROM countries WHERE name LIKE &quot;%The%&quot;)
+SELECT COUNT(*) FROM previous_results;
+
+
+SELECT countries.continent, ROUND(SUM(population_years.population),2) AS Population FROM population_years
+JOIN countries
+  ON countries.id = population_years.country_id
+WHERE population_years.year = 2010
+GROUP BY countries.continent
+ORDER BY 2 DESC;
+
+
+
+
+
+
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
